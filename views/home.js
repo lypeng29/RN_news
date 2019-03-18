@@ -9,7 +9,7 @@ export default class Home extends Component {
         this.state = {
             data: [],
             show: true,
-            keyword: 'react'
+            keyword: ''
         };
     }
     componentDidMount() {
@@ -35,7 +35,7 @@ export default class Home extends Component {
         // 请求数据
         var that = this;
         var cid = this.props.navigation.getParam('cid','');
-        var url = Api.article_list + '?cid=' + cid;
+        var url = Api.article_list + '?keyword=' + this.state.keyword + '&cid=' + cid;
         Util.getRequest(url, function (response) {
             // 请求成功
             if (!response.data || response.data.length == 0) {
@@ -59,6 +59,7 @@ export default class Home extends Component {
                 <SearchBar
                     placeholder="请输入关键词（书名、作者）..."
                     onChangeText={this.updateSearch}
+                    onSubmitEditing={this.searchText}
                     onPress={this.searchText}
                 />
                 {

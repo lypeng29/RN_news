@@ -7,11 +7,9 @@ export default class SearchBar extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
+                    <Icon name="search" color="#555" size={16} containerStyle={styles.icon} {...this.props}/>
                     <TextInput style={styles.input} {...this.props} />
                 </View>
-                <TouchableOpacity style={styles.btn} {...this.props}>
-                    <Icon name="search" color="#fff"/>
-                </TouchableOpacity>
             </View>
         );
     }
@@ -19,25 +17,27 @@ export default class SearchBar extends Component {
 
 var styles = StyleSheet.create({
     container:{
-        flexDirection:"row",
-        justifyContent:"flex-end",
-        alignItems:"center",
-        height:40,
-        marginTop:10,
-        marginBottom:-15
+        marginTop:10
     },
     inputContainer:{
         flex:1,
-        marginLeft:5
+        flexDirection: "row",
+        alignItems: 'center',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: "#ddd",
+        backgroundColor:'#f8f8f8',
+        marginLeft:10,
+        marginRight:10,
+        height: 40,
+        lineHeight: 40
     },
     input:{
-        flex:1,
-        height:40,
-        borderWidth:1,
-        borderRadius:4,
-        borderColor:"#ccc",
-        paddingLeft:5,
-        lineHeight:40
+        flex:9,
+        fontSize:14
+    },
+    icon:{
+        flex: 1
     },
     btn:{
         width:55,
