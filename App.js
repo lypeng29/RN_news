@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Icon } from 'react-native-elements';
-import HomePage from './views/home';
-import CategoryPage from './views/category';
-import UserPage from './views/user';
-import ExamplePage from './views/example';
-import GuestbookPage from './views/guestbook';
-import DetailsPage from './views/detail';
+import HomePage from './src/pages/home';
+import CategoryPage from './src/pages/category';
+import UserPage from './src/pages/user';
+import ExamplePage from './src/pages/example';
+import GuestbookPage from './src/pages/guestbook';
+import DetailsPage from './src/pages/detail';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from "react-navigation";
 
 class LeftBar extends Component {
