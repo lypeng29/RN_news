@@ -45,7 +45,7 @@ export default class index extends Component {
             <ScrollView style={styles.container}>
                 <View>
                     <Text style={styles.title}>问题建议</Text>
-                    <TextInput style={{ backgroundColor: '#f1f1f1', padding: 5, height: 140, fontSize: 14, textAlignVertical: 'top' }} placeholder='请在此描述问题或者建议' autoFocus={true} maxLength={200} multiline={true} onChangeText={(newText) => this._updateText(1,newText)}/>
+                    <TextInput style={{ backgroundColor: '#f1f1f1', padding: 5, height: 100, fontSize: 14, textAlignVertical: 'top' }} placeholder='请在此描述问题或者建议' autoFocus={true} maxLength={200} multiline={true} onChangeText={(newText) => this._updateText(1,newText)}/>
                 </View>                
                 <View>
                     <Text style={styles.title}>联系方式</Text>
@@ -71,7 +71,7 @@ var styles = StyleSheet.create({
         fontWeight:"400",
         color:"#666",
         fontSize:18,
-        marginTop:30,
+        marginTop:15,
         marginBottom:10
     }
 })

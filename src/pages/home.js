@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import SearchBar from '../common/searchbar';
+import SearchBar from './components/searchbar';
 import Util from '../common/util';
 import Urls from '../common/urls';
 
@@ -81,7 +81,7 @@ export default class Home extends Component {
         return (
             <ScrollView>
                 <SearchBar
-                    placeholder="请输入关键词（书名、作者）..."
+                    placeholder="请输入关键词..."
                     onChangeText={this.updateSearch}
                     onSubmitEditing={this.searchText}
                     onPress={this.searchText}

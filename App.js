@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Icon } from 'react-native-elements';
 import HomePage from './src/pages/home';
 import CategoryPage from './src/pages/category';
+import ArticlePage from './src/pages/article';
 import UserPage from './src/pages/user';
-import ExamplePage from './src/pages/example';
 import GuestbookPage from './src/pages/guestbook';
-import DetailsPage from './src/pages/detail';
+import DetailsPage from './src/pages/details';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from "react-navigation";
 
 class LeftBar extends Component {
@@ -52,13 +52,7 @@ const bottomTabNavigator = createBottomTabNavigator({
         navigationOptions: ({ navigation }) => ({
             title: '我的',
         }),
-    },
-    Example: {
-        screen: ExamplePage,
-        navigationOptions: ({ navigation }) => ({
-            title: '示例',
-        }),
-    }             
+    }            
     }, {
         defaultNavigationOptions: ({ navigation }) => ({          
             tabBarIcon: ({ focused, tintColor }) => {
@@ -70,9 +64,7 @@ const bottomTabNavigator = createBottomTabNavigator({
                     iconName = 'menu';
                 } else if (routeName === 'Guestbook') {
                     iconName = 'message';
-                } else if (routeName === 'Example') {
-                    iconName = 'android';
-                }else {
+                } else {
                     iconName = 'person';
                 }
                 return <Icon name={iconName} size={25} color={tintColor} />;
@@ -92,10 +84,18 @@ const AppStack = createStackNavigator(
         Details: {
             screen: DetailsPage,
             navigationOptions: {
-                title: "文章详情"
+                title: "文章详情",
+                headerTintColor: '#666',
+                headerStyle: {
+                    backgroundColor: '#f8f8f8',
+                    height: 45 //影藏header
+                },
+                headerTitleStyle:{
+                    fontSize:16
+                }
             }
         },
-        Home:HomePage
+        Article:ArticlePage
     }, {
         initialRouteName: "bottomTabNavigator",
         defaultNavigationOptions: {

@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import SearchBar from './components/searchbar';
 import Util from '../common/util';
 import Urls from '../common/urls';
-export default class index extends Component {
+
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
-            show: true
+            show: true,
+            keyword: ''
         };
     }
     componentDidMount() {
         // 初次请求数据
         this.getData();
+        // 
     }
+    updateSearch = search => {
+        this.setState({ keyword: search });
+    }
+    searchText = () => {
+        this.getData();
+    }
+    // 以下写法报错，不识别this
+    // searchText (){
+    //     this.getData();
+    // }
+
     getData() {
         // 显示loading
         this.setState({
@@ -21,7 +36,8 @@ export default class index extends Component {
         });
         // 请求数据
         var that = this;
-        var url = Urls.category_list;
+        var cateid = this.props.navigation.getParam('cid','');
+        var url = Urls.article_list + '?keyword=' + this.state.keyword + '&cid=' + cateid;
         Util.getRequest(url, function (response) {
             // 请求成功
             if (!response.data || response.data.length == 0) {
@@ -38,8 +54,16 @@ export default class index extends Component {
         });
     }
     render() {
+        let full_width = Util.windowSize.width;
+        let image_width = full_width - 20;
         return (
             <ScrollView>
+                <SearchBar
+                    placeholder="请输入关键词..."
+                    onChangeText={this.updateSearch}
+                    onSubmitEditing={this.searchText}
+                    onPress={this.searchText}
+                />
                 {
                     // 请求数据时显示loading，请求成功显示列表
                     this.state.show ?
@@ -47,11 +71,12 @@ export default class index extends Component {
                             {
                                 this.state.data.map((item, i) => {
                                     return (
-                                        <TouchableOpacity style={styles.list} key={i} onPress={() => this.props.navigation.push('Article', { 'cid': item.id })}
+                                        <TouchableOpacity style={styles.list} key={i} onPress={() => this.props.navigation.push('Details', { 'id': item.id })}
                                             activeOpacity={0.5}>
-                                            <Image source={{ uri: item.thumb }} style={styles.images}/>
-                                            <Text style={styles.title}>{item.name}</Text>
-                                            <Text style={styles.intro} numberOfLines={2}>{item.intro}</Text>
+                                            <Image source={{ uri: item.thumb }} style={{ width: image_width, height: 160, marginBottom: 10 }} />
+                                            <Text style={styles.title}>{item.title}</Text>
+                                            <Text style={styles.intro} numberOfLines={4}>{item.intro}</Text>
+                                            <Text style={styles.author}>by {item.author} {item.addtime}</Text>
                                         </TouchableOpacity>
                                     );
                                 })
@@ -64,26 +89,20 @@ export default class index extends Component {
     }
 }
 
-let screenWidth = Util.windowSize.width;
-let space = 10;
-let numbers = 2;
-let list_width = screenWidth / numbers - space * 2;
-
 var styles = StyleSheet.create({
     container: {
-        flex:1,
-        flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around'        
-    },  
-    list: {
-        width:list_width,
-        // height:list_height,
-        marginTop:10,
-        flexDirection: 'column'        
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: "center",
+        padding: 10,
+        marginTop: 0
     },
-    images:{
-        width:list_width,
-        height:list_width,
-        marginBottom:5
+    list: {
+        borderBottomColor: "#e3e3e3",
+        borderBottomWidth: 1,
+        paddingTop: 0,
+        paddingBottom: 15,
+        marginBottom:15
     },
     title: {
         fontWeight: "500",

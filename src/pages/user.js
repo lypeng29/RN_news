@@ -6,13 +6,14 @@ export default class UserPage extends Component {
     _settingAction = () => alert('setting')
 
     _onLogin = () => {
-        const { app, navigator } = this.props
-        app.updateBarStyle('default')
-        navigator.push({
-            id: 'Login',
-            sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
-            passProps: { onResetBarStyle: () => app.updateBarStyle('light-content') }
-        })
+        // const { app, navigator } = this.props
+        // app.updateBarStyle('default')
+        // navigator.push({
+        //     id: 'Login',
+        //     sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+        //     passProps: { onResetBarStyle: () => app.updateBarStyle('light-content') }
+        // })
+        alert('login');
     }
 
     _onPressStaticCell = title => alert(title)    

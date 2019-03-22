@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, Image, StyleSheet } from 'react-native';
 import Util from '../common/util';
 import Urls from '../common/urls';
+import HTMLView from 'react-native-htmlview';
 export default class BookDetail extends Component {
     constructor(props) {
         super(props);
@@ -26,21 +27,21 @@ export default class BookDetail extends Component {
     }
     render(){
         var bookData = this.state.bookData;
+        var htmlContent = '<p>你们好<hr/><br/>xiexie!</p>';
         return (
-            <ScrollView>
+            <ScrollView style={styles.container}>
                 {
                     bookData != null ?
                     <View>
-                            <View>
-                                <Text style={styles.title}>{bookData.title}</Text>
-                            </View>
+                            <Text style={styles.title}>{bookData.title}</Text>
                             <View style={styles.meta}>
                                 <Text>{bookData.author}</Text>
                                 <Text style={styles.time}>{bookData.addtime}</Text>
                             </View>
-                            <View style={styles.content}>
-                                <Text>{bookData.content}</Text>
-                            </View>
+                            <HTMLView
+                                value={htmlContent}
+                                stylesheet={styles.content}
+                            />
                     </View>
                     : Util.loading
 
@@ -52,9 +53,6 @@ export default class BookDetail extends Component {
 }
 var styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: "center",
         padding: 10,
         marginTop: 0
     },
