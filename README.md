@@ -11,7 +11,8 @@ react-native run-android
 
 ## 界面截图
 
-![](http://img.lypeng.com/git/20190322.png)
+![](http://img.lypeng.com/git/2019032201.jpg)
+![](http://img.lypeng.com/git/2019032202.jpg)
 
 ## 未完功能
  - 上滑加载更多
