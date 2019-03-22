@@ -6,7 +6,6 @@ import {
     Dimensions,//获取设备屏幕的宽高
     ActivityIndicator
 } from 'react-native';
-import { existsTypeAnnotation } from '@babel/types';
 
 var Util = {
     // 屏幕尺寸
@@ -41,7 +40,7 @@ var Util = {
         fetch(url, opts)
             .then((response) => {
                 if (response.ok) {
-                    return response.text()
+                    return response.json()
                 } else {
                     alert('服务器繁忙，请稍后再试；\r\nCode:' + response.status)
                 }

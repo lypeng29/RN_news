@@ -3,18 +3,25 @@ import { Text, View, ScrollView, Image, StyleSheet, TouchableOpacity } from 'rea
 import SearchBar from '../common/searchbar';
 import Util from '../common/util';
 import Urls from '../common/urls';
+
+// import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view';
+
+import TabBar from './components/tabbar';
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
             show: true,
-            keyword: ''
+            keyword: '',
+            tablist: []
         };
     }
     componentDidMount() {
         // 初次请求数据
-        this.getData();
+        this.getCategory();
+        // 
     }
     updateSearch = search => {
         this.setState({ keyword: search });
@@ -27,15 +34,32 @@ export default class Home extends Component {
     //     this.getData();
     // }
 
-    getData() {
+    getCategory(){
+        var url = Urls.category_list;
+        var that = this;
+        var datalist=[];
+        Util.getRequest(url,function(response){
+            datalist[0] = { 'id': 0, 'name': '全部' };
+            response.data.map((item,index)=>{
+                datalist[index+1] = {'id':item.id,'name':item.name};
+            })
+            that.setState({
+                tablist: datalist
+            })
+            that.getData();
+        },function(err){
+            alert(err);
+        })
+    }
+    getData(cid='') {
         // 显示loading
         this.setState({
             show: false
         });
         // 请求数据
         var that = this;
-        var cid = this.props.navigation.getParam('cid','');
-        var url = Urls.article_list + '?keyword=' + this.state.keyword + '&cid=' + cid;
+        var cateid = this.props.navigation.getParam('cid',cid);
+        var url = Urls.article_list + '?keyword=' + this.state.keyword + '&cid=' + cateid;
         Util.getRequest(url, function (response) {
             // 请求成功
             if (!response.data || response.data.length == 0) {
@@ -62,6 +86,9 @@ export default class Home extends Component {
                     onSubmitEditing={this.searchText}
                     onPress={this.searchText}
                 />
+                <TabBar style={{marginTop:10}} ref={e => this.tabs = e} index={this.state.index} data={this.state.tablist}
+                    onChange={(index) => { id = this.state.tablist[index].id;this.getData(id); }} />
+
                 {
                     // 请求数据时显示loading，请求成功显示列表
                     this.state.show ?
@@ -71,7 +98,7 @@ export default class Home extends Component {
                                     return (
                                         <TouchableOpacity style={styles.list} key={i} onPress={() => this.props.navigation.push('Details', { 'id': item.id })}
                                             activeOpacity={0.5}>
-                                            <Image source={{ uri: item.thumb }} style={{ width: image_width,height:160,marginBottom:10}}/>
+                                            <Image source={{ uri: item.thumb }} style={{ width: image_width, height: 160, marginBottom: 10 }} />
                                             <Text style={styles.title}>{item.title}</Text>
                                             <Text style={styles.intro} numberOfLines={4}>{item.intro}</Text>
                                             <Text style={styles.author}>by {item.author} {item.addtime}</Text>
@@ -98,8 +125,9 @@ var styles = StyleSheet.create({
     list: {
         borderBottomColor: "#e3e3e3",
         borderBottomWidth: 1,
-        paddingTop: 25,
-        paddingBottom: 25
+        paddingTop: 0,
+        paddingBottom: 15,
+        marginBottom:15
     },
     title: {
         fontWeight: "500",

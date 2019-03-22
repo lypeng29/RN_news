@@ -33,7 +33,7 @@ export default class UserPage extends Component {
                         onPress={this._onPressStaticCell}
                     />
                     <ProfileStaticCell
-                        title="上传食物数据"
+                        title="上传数据"
                         imageName={require('../assets/images/ic_my_upload.png')}
                         onPress={this._onPressStaticCell}
                     />

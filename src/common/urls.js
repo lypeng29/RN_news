@@ -5,8 +5,7 @@ var news_apis = {
     article_list : baseurl + "article/index",
     article_view: baseurl + "article/view",
     category_list : baseurl + "category/index",
-    guestbook_list : baseurl + "guestbook/index",
-    guestbook_post : baseurl + "guestbook/post",
+    guestbook_add: baseurl + "guestbook/add_info",
 }
 
 export default news_apis;

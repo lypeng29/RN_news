@@ -5061,6 +5061,11 @@ react-native-tab-view@^1.0.0, react-native-tab-view@^1.2.0:
   dependencies:
     prop-types "^15.6.1"
 
+react-native-tabs-top@^0.7.6:
+  version "0.7.6"
+  resolved "http://registry.npm.taobao.org/react-native-tabs-top/download/react-native-tabs-top-0.7.6.tgz#5d7ad7b77e7dc7de082d5ff416efbf3771ac44b5"
+  integrity sha1-XXrXt359x94ILV/0Fu+/N3GsRLU=
+
 react-native-vector-icons@^6.4.1:
   version "6.4.1"
   resolved "http://registry.npm.taobao.org/react-native-vector-icons/download/react-native-vector-icons-6.4.1.tgz#bf69b5321b67c5f510e09d39e3bf4d193f2596c5"

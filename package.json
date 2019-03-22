@@ -12,6 +12,7 @@
     "react-native-elements": "^1.1.0",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-scrollable-tab-view": "^0.10.0",
+    "react-native-tabs-top": "^0.7.6",
     "react-native-vector-icons": "^6.4.1",
     "react-navigation": "^3.3.2"
   },

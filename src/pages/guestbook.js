@@ -27,13 +27,13 @@ export default class index extends Component {
         }else if (this.state.tel == '') {
             alert('电话不能为空');
         }else{
-            var url = Urls.guestbook_post;
+            var url = Urls.guestbook_add;
             var post_data = {
                 'content':this.state.content,
                 'tel':this.state.tel
             };
             Util.postRequest(url, post_data,function(data){
-                alert(data);
+                alert('提交成功！感谢您的建议！'+data.data.c);
             },function(err) {
                 alert(err);
             })
@@ -51,7 +51,7 @@ export default class index extends Component {
                     <Text style={styles.title}>联系方式</Text>
                     <TextInput style={{ backgroundColor: '#f1f1f1', fontSize: 14, padding: 5 }} placeholder='请输入手机号' autoComplete={'email'} keyboardType='phone-pad' onChangeText={(newText) => this._updateText(2,newText)}/>
                 </View>
-                <View>
+                <View style={{marginTop:20}}>
                     <Button title='提交' style={styles.btn} onPress={this._submitData.bind(this)}/>
                 </View>
             </ScrollView>
@@ -65,7 +65,7 @@ var styles = StyleSheet.create({
         margin:10
     },
     btn:{
-        marginTop:20
+        borderRadius:10
     },
     title:{
         fontWeight:"400",
