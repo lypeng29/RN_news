@@ -3,18 +3,8 @@ import { View, TouchableOpacity, Text, Image,ImageBackground,Dimensions, StyleSh
 import {Icon} from 'react-native-elements';
 
 export default class UserPage extends Component {
-    _settingAction = () => alert('setting')
-
-    _onLogin = () => {
-        // const { app, navigator } = this.props
-        // app.updateBarStyle('default')
-        // navigator.push({
-        //     id: 'Login',
-        //     sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
-        //     passProps: { onResetBarStyle: () => app.updateBarStyle('light-content') }
-        // })
-        alert('login');
-    }
+    _settingAction = () => this.props.navigation.push('Settings');
+    _onLogin = () => this.props.navigation.push('Login');
 
     _onPressStaticCell = title => alert(title)    
 
@@ -24,12 +14,12 @@ export default class UserPage extends Component {
                 <HeaderView settingAction={this._settingAction} loginAction={this._onLogin} />
                 <View style={styles.cellContainer}>
                     <ProfileStaticCell
-                        title="我的照片"
+                        title="我的相册"
                         imageName={require('../assets/images/ic_my_photos.png')}
                         onPress={this._onPressStaticCell}
                     />
                     <ProfileStaticCell
-                        title="我的收藏"
+                        title="发布说说"
                         imageName={require('../assets/images/ic_my_collect.png')}
                         onPress={this._onPressStaticCell}
                     />

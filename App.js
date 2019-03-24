@@ -6,6 +6,8 @@ import ArticlePage from './src/pages/article';
 import UserPage from './src/pages/user';
 import GuestbookPage from './src/pages/guestbook';
 import DetailsPage from './src/pages/details';
+import SettingsPage from './src/pages/settings';
+import LoginPage from './src/pages/login';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from "react-navigation";
 
 class LeftBar extends Component {
@@ -95,7 +97,10 @@ const AppStack = createStackNavigator(
                 }
             }
         },
-        Article:ArticlePage
+        Guestbook:GuestbookPage,
+        Article:ArticlePage,
+        Settings:SettingsPage,
+        Login:LoginPage,
     }, {
         initialRouteName: "bottomTabNavigator",
         defaultNavigationOptions: {
