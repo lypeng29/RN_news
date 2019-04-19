@@ -10,26 +10,6 @@ import SettingsPage from './src/pages/settings';
 import LoginPage from './src/pages/login';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from "react-navigation";
 
-class LeftBar extends Component {
-    constructor(props) {
-        super(props);
-    }    
-    render(){
-        return(
-            <Icon name="menu" color="#fff" style={{ marginLeft: 5 }} onPress={() => this.props.navigation.push('Category')} />
-        )
-    }
-}
-class RightBar extends Component {
-    constructor(props) {
-        super(props);
-    }    
-    render() {
-        return (
-            <Icon name="settings" color="#fff" style={{ marginLeft: 5 }} onPress={() => this.props.navigation.push('Home')} />
-        )
-    }
-}
 const bottomTabNavigator = createBottomTabNavigator({
     Home:{
         screen: HomePage,
@@ -42,13 +22,7 @@ const bottomTabNavigator = createBottomTabNavigator({
         navigationOptions: ({ navigation }) => ({
             title: '栏目',
         }),
-    },        
-    Guestbook: {
-        screen:GuestbookPage,
-        navigationOptions: ({ navigation }) => ({
-            title: '留言',
-        }),
-    },        
+    },
     User: {
         screen:UserPage,
         navigationOptions: ({ navigation }) => ({
