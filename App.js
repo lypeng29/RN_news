@@ -23,6 +23,12 @@ const bottomTabNavigator = createBottomTabNavigator({
             title: '栏目',
         }),
     },
+    Guestbook:{
+        screen: GuestbookPage,
+        navigationOptions: ({ navigation }) => ({
+            title: '留言',
+        }),
+    },
     User: {
         screen:UserPage,
         navigationOptions: ({ navigation }) => ({
@@ -64,7 +70,7 @@ const AppStack = createStackNavigator(
                 headerTintColor: '#666',
                 headerStyle: {
                     backgroundColor: '#f8f8f8',
-                    height: 45 //影藏header
+                    height: 45
                 },
                 headerTitleStyle:{
                     fontSize:16
@@ -72,7 +78,20 @@ const AppStack = createStackNavigator(
             }
         },
         Guestbook:GuestbookPage,
-        Article:ArticlePage,
+        Article:{
+            screen: ArticlePage,
+            navigationOptions:{
+                title: "文章列表",
+                headerTintColor: '#666',
+                headerStyle: {
+                    backgroundColor: '#f8f8f8',
+                    height: 45
+                },
+                headerTitleStyle: {
+                    fontSize: 16
+                }
+            }
+        },
         Settings:SettingsPage,
         Login:LoginPage,
     }, {
@@ -80,7 +99,7 @@ const AppStack = createStackNavigator(
         defaultNavigationOptions: {
             headerTintColor: '#fff',
             headerStyle: {
-                backgroundColor: '#2596f3',
+                backgroundColor: '#f8f8f8',
                 height: 0 //影藏header
             }
         }, 
