@@ -9,6 +9,11 @@ react-native link
 react-native run-android
 ```
 
+## 扫码预览
+
+![](http://img.lypeng.com/git/20190429.png)
+
+
 ## 界面截图
 
 ![](http://img.lypeng.com/git/2019032201.jpg)
