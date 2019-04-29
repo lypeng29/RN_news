@@ -63,7 +63,7 @@ export default class Home extends Component {
                 var that = this;
                 var cateid = this.props.navigation.getParam('cid', '');
                 var url = Urls.article_list + '?page=' + this.state.page + '&cid=' + cateid;
-                // alert(url);
+                alert(url);
                 Util.getRequest(url, function (res) {
                     res.data.map((item, i) => {
                         newData.push(item);
@@ -113,72 +113,56 @@ export default class Home extends Component {
             </TouchableOpacity>            
             // <Text style={styles.item}>{item.title}</Text>
         )
-    }    
+    }
+    ListHeaderComponent(){
+        return (
+            <View>
+            <StatusBar
+                animated={true} //指定状态栏的变化是否应以动画形式呈现。目前支持这几种样式：backgroundColor, barStyle和hidden
+                hidden={false}  //是否隐藏状态栏。
+                networkActivityIndicatorVisible={false}//仅作用于ios。是否显示正在使用网络。
+                showHideTransition={'fade'}//仅作用于ios。显示或隐藏状态栏时所使用的动画效果（’fade’, ‘slide’）。
+                backgroundColor={'#00b600'} //状态栏的背景色
+                translucent={false}//指定状态栏是否透明。设置为true时，应用会在状态栏之下绘制（即所谓“沉浸式”——被状态栏遮住一部分）。常和带有半透明背景色的状态栏搭配使用。
+                barStyle={'light-content'} // enum('default', 'light-content', 'dark-content')
+                >
+            </StatusBar>
+            <SearchBar
+                placeholder="请输入关键词..."
+                onChangeText={this.updateSearch}
+                onSubmitEditing={this.searchText}
+                onPress={this.searchText}
+                />
+                {/* <TabBar style={{marginTop:10}} ref={e => this.tabs = e} index={this.state.index} data={this.state.tablist} */ }
+                {/* onChange={(index) => { id = this.state.tablist[index].id;this.getData(id); }} /> */ }
+            <TabBar style={{ marginTop: 10 }} ref={e => this.tabs = e} index={this.state.index} data={this.state.tablist}
+            onChange={(index) => { id = this.state.tablist[index].id; this.props.navigation.push('Article', { 'cid': id }); }} />
+            </View>
+        )
+    }
     render() {
         return (
-            <ScrollView>
-            <StatusBar
-                    animated={true} //指定状态栏的变化是否应以动画形式呈现。目前支持这几种样式：backgroundColor, barStyle和hidden
-                    hidden={false}  //是否隐藏状态栏。
-                    networkActivityIndicatorVisible ={false}//仅作用于ios。是否显示正在使用网络。
-                    showHideTransition={'fade'}//仅作用于ios。显示或隐藏状态栏时所使用的动画效果（’fade’, ‘slide’）。
-                    backgroundColor={'#00b600'} //状态栏的背景色
-                    translucent={false}//指定状态栏是否透明。设置为true时，应用会在状态栏之下绘制（即所谓“沉浸式”——被状态栏遮住一部分）。常和带有半透明背景色的状态栏搭配使用。
-                    barStyle={'light-content'} // enum('default', 'light-content', 'dark-content')
-                >
-                </StatusBar>
-                <SearchBar
-                    placeholder="请输入关键词..."
-                    onChangeText={this.updateSearch}
-                    onSubmitEditing={this.searchText}
-                    onPress={this.searchText}
-                />
-                {/* <TabBar style={{marginTop:10}} ref={e => this.tabs = e} index={this.state.index} data={this.state.tablist} */}
-                    {/* onChange={(index) => { id = this.state.tablist[index].id;this.getData(id); }} /> */}
-                <TabBar style={{marginTop:10}} ref={e => this.tabs = e} index={this.state.index} data={this.state.tablist}
-                    onChange={(index) => { id = this.state.tablist[index].id; this.props.navigation.push('Article', { 'cid': id }); }} />
+            <FlatList
+                data={this.state.listData}
+                renderItem={({ item }) => this._renderItem(item)}
 
-                <FlatList
-                    data={this.state.listData}
-                    renderItem={({ item }) => this._renderItem(item)}
+                // 上拉加载更多数据
+                onEndReachedThreshold={.2}
+                onEndReached={() => {
+                    this.getData()
+                }}
 
-                    // 上拉加载更多数据
-                    onEndReachedThreshold={.2}
-                    onEndReached={() => {
-                        this.getData()
-                    }}
+                ListHeaderComponent={this.ListHeaderComponent.bind(this)}
+                ListFooterComponent={this.ListFooterComponent.bind(this)}
 
-                    ListFooterComponent={this.ListFooterComponent.bind(this)}
+                // key值
+                keyExtractor={(item, index) => item.id}
 
-                    // key值
-                    keyExtractor={(item, index) => item.id}
+                //设置下拉加载更多的指示器的位置
+                // progressViewOffset={50}
 
-                    //设置下拉加载更多的指示器的位置
-                    // progressViewOffset={50}
-
-                />
-                {/* {
-                    // 请求数据时显示loading，请求成功显示列表
-                    this.state.show ?
-                        <View style={styles.container} >
-                            {
-                                this.state.data.map((item, i) => {
-                                    return (
-                                        <TouchableOpacity style={styles.list} key={i} onPress={() => this.props.navigation.push('Details', { 'id': item.id })}
-                                            activeOpacity={0.5}>
-                                            <Image source={{ uri: item.thumb }} style={{ width: image_width, height: 160, marginBottom: 10 }} />
-                                            <Text style={styles.title}>{item.title}</Text>
-                                            <Text style={styles.intro} numberOfLines={4}>{item.intro}</Text>
-                                            <Text style={styles.author}>by {item.author} {item.addtime}</Text>
-                                        </TouchableOpacity>
-                                    );
-                                })
-                            }
-                        </View>
-                        : Util.loading
-                } */}
-            </ScrollView>
-        )
+            />
+        )        
     }
 }
 
