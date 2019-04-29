@@ -15,5 +15,4 @@ react-native run-android
 ![](http://img.lypeng.com/git/2019032202.jpg)
 
 ## 未完功能
- - 上滑加载更多
  - 登录注册，用户相关

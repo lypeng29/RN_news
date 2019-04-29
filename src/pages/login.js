@@ -27,16 +27,16 @@ export default class login extends Component {
         }else if (this.state.password == '') {
             alert('密码不能为空');
         }else{
-            var url = Urls.login;
-            var post_data = {
-                'username':this.state.username,
-                'password':this.state.password
-            };
-            Util.postRequest(url, post_data,function(data){
-                alert('登录成功！感谢您的建议！'+data.data.token);
-            },function(err) {
-                alert(err);
-            })
+            // var url = Urls.login;
+            // var post_data = {
+            //     'username':this.state.username,
+            //     'password':this.state.password
+            // };
+            // Util.postRequest(url, post_data,function(data){
+                alert('登录成功！');
+            // },function(err) {
+                // alert(err);
+            // })
         }
     }
 

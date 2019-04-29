@@ -14,7 +14,7 @@ export default class UserPage extends Component {
                 <HeaderView settingAction={this._settingAction} loginAction={this._onLogin} />
                 <View style={styles.cellContainer}>
                     <ProfileStaticCell
-                        title="我的相册"
+                        title="我的文章"
                         imageName={require('../assets/images/ic_my_photos.png')}
                         onPress={this._onPressStaticCell}
                     />
@@ -24,7 +24,7 @@ export default class UserPage extends Component {
                         onPress={this._onPressStaticCell}
                     />
                     <ProfileStaticCell
-                        title="上传数据"
+                        title="上传头像"
                         imageName={require('../assets/images/ic_my_upload.png')}
                         onPress={this._onPressStaticCell}
                     />

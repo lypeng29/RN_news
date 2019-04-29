@@ -37,6 +37,11 @@ export default class SettingsPage extends Component {
                         imageName={require('../assets/images/ic_my_upload.png')}
                         onPress={this._onPressStaticCell}
                     />
+                    <ProfileStaticCell
+                        title="插件实验室"
+                        imageName={require('../assets/images/ic_my_collect.png')}
+                        onPress={this._onPressStaticCell}
+                    />
                 </View>
                 <View style={styles.cellContainer}>
                     <ProfileStaticCell
@@ -48,11 +53,6 @@ export default class SettingsPage extends Component {
                         title="帮助与反馈"
                         imageName={require('../assets/images/ic_my_photos.png')}
                         onPress={()=>this.props.navigation.push('Guestbook')}
-                    />
-                    <ProfileStaticCell
-                        title="插件"
-                        imageName={require('../assets/images/ic_my_collect.png')}
-                        onPress={this._onPressStaticCell}
                     />
                 </View>                                
                 <View style={styles.cellContainer}>

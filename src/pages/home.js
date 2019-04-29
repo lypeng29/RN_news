@@ -13,12 +13,10 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: true,
             keyword: '',
             tablist: [],
             refresh: false,
             listData: [],
-            animating: true,
             loadMore: 1,
             page: 1,
             isload: 0 //避免多次加载
@@ -52,7 +50,7 @@ export default class Home extends Component {
             alert(err);
         })
     }
-    getData() {
+    getData(cid='') {
         if (this.state.isload == 0) {
             this.setState({
                 isload: 1
@@ -61,9 +59,9 @@ export default class Home extends Component {
             if (this.state.loadMore == 1) {
                 // 发起请求
                 var that = this;
-                var cateid = this.props.navigation.getParam('cid', '');
+                var cateid = this.props.navigation.getParam('cid', cid);
                 var url = Urls.article_list + '?page=' + this.state.page + '&cid=' + cateid;
-                alert(url);
+                // alert(url);
                 Util.getRequest(url, function (res) {
                     res.data.map((item, i) => {
                         newData.push(item);
@@ -115,8 +113,9 @@ export default class Home extends Component {
         )
     }
     ListHeaderComponent(){
+        var that = this;
         return (
-            <View>
+            <View style={{marginBottom:10}}>
             <StatusBar
                 animated={true} //指定状态栏的变化是否应以动画形式呈现。目前支持这几种样式：backgroundColor, barStyle和hidden
                 hidden={false}  //是否隐藏状态栏。
@@ -127,16 +126,22 @@ export default class Home extends Component {
                 barStyle={'light-content'} // enum('default', 'light-content', 'dark-content')
                 >
             </StatusBar>
-            <SearchBar
-                placeholder="请输入关键词..."
-                onChangeText={this.updateSearch}
-                onSubmitEditing={this.searchText}
-                onPress={this.searchText}
-                />
-                {/* <TabBar style={{marginTop:10}} ref={e => this.tabs = e} index={this.state.index} data={this.state.tablist} */ }
-                {/* onChange={(index) => { id = this.state.tablist[index].id;this.getData(id); }} /> */ }
-            <TabBar style={{ marginTop: 10 }} ref={e => this.tabs = e} index={this.state.index} data={this.state.tablist}
-            onChange={(index) => { id = this.state.tablist[index].id; this.props.navigation.push('Article', { 'cid': id }); }} />
+            {/* <SearchBar placeholder="请输入关键词..." onChangeText={that.updateSearch} onSubmitEditing={that.searchText} /> */}
+                {/* 
+                // 这里切换有问题，暂时跳转到Article页面
+                <TabBar style={{marginTop:10}} ref={e => this.tabs = e} index={this.state.index} data={this.state.tablist}
+                onChange={(index) => { 
+                        id = this.state.tablist[index].id;
+                        this.setState({
+                            listData:[], //点击后清空下数据
+                            page:1,
+                            loadMore:1
+                        })
+                        this.getData(id);
+                    }} />
+                <TabBar style={{ marginTop: 10 }} ref={e => this.tabs = e} index={this.state.index} data={this.state.tablist}
+                onChange={(index) => { id = this.state.tablist[index].id; this.props.navigation.push('Article', { 'cid': id }); }} />
+                */}
             </View>
         )
     }

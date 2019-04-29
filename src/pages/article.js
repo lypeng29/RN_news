@@ -26,20 +26,21 @@ export default class Article extends Component {
             refresh: true
         })
         let newData = []
-        for (let i = 1; i < 3; i++) {
-            var id = i.toString();
-            newData.push(
-                {
-                    'id': id, 'cid': 1, 'title': '演示数据', 'addtime': "2019年04月29日",
-                    'thumb':'http://news.dpshop.net/public/static/images/nopic.jpg',
-                    'author':'admin','intro': '这是演示数据'
-                }
-            )
-        }
+        // for (let i = 1; i < 3; i++) {
+        //     var id = i.toString();
+        //     newData.push(
+        //         {
+        //             'id': id, 'cid': 1, 'title': '演示数据', 'addtime': "2019年04月29日",
+        //             'thumb':'http://news.dpshop.net/public/static/images/nopic.jpg',
+        //             'author':'admin','intro': '这是演示数据'
+        //         }
+        //     )
+        // }
         setTimeout(() => {
+            alert('没有新数据');
             this.setState({
                 refresh: false,
-                listData: [...newData, ...this.state.listData]
+                // listData: [...newData, ...this.state.listData]
             })
         }, 1500)
     }
